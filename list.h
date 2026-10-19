@@ -2,8 +2,8 @@
 #define _LISTE_
 
 typedef struct _list_node s_node;
-s_node * list_create(void);
 
+s_node * list_create(void);
 void * list_get_data(s_node * node);
 void list_set_data(s_node * node, void * data);
 s_node * list_insert(s_node * head, void * data);
