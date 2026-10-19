@@ -33,9 +33,14 @@ s_node* list_create(){
 
 s_node* list_insert(s_node* head, void* val){
     s_node* new_head = (s_node*)malloc(sizeof(s_node));
-    list_set_data(new_head, val);
-    new_head->next = head;
-    return new_head;
+    if(new_head!=NULL){
+        list_set_data(new_head, val);
+        new_head->next = head;
+        return new_head;
+    }
+    else{
+        return head;
+    }
 }
 /*
 s_node* list_append(s_node* head, void* val){
