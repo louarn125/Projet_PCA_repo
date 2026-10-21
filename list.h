@@ -16,6 +16,7 @@ s_node * list_remove(s_node * head, void * data);
 s_node * list_headRemove(s_node * head);
 s_node * list_next(s_node * node);
 void list_destroy(s_node * head);
-void displaylist(s_node * head, void(*display)(s_node*));
+void display_list(s_node * head, void(*display)(s_node*));
+void display_int(s_node * noeud);
 
 #endif

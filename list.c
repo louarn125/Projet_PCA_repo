@@ -1,4 +1,6 @@
 #include "list.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 
 
@@ -17,8 +19,13 @@ void list_set_data(s_node * node, void * data){
     if(node != NULL) node->val = data;
     return;
 }
-
+/*
 s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void * param){
+    if(head == NULL){
+        return head;
+    }else if(*head == NULL){
+        return head;
+    }
     s_node * iteration = *head;
     while(iteration->next != NULL && compare(iteration,param)){
         iteration = iteration->next;
@@ -27,6 +34,7 @@ s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void
 
     }
 }
+    */
 s_node* list_create(){
     return NULL;
 }
@@ -42,16 +50,20 @@ s_node* list_insert(s_node* head, void* val){
         return head;
     }
 }
-/*
-s_node* list_append(s_node* head, void* val){
-    s_node* new_queue = (s_node*)malloc(sizeof(s_node));
-    s_node* cur_queue = head;
-    while(cur_queue->next!=NULL){
-        cur_queue = cur_queue->next;
+
+void display_list(s_node *head, void (*display)(s_node*)){
+    if(head == NULL){
+        return;
     }
-    cur_queue->next = new_queue;
-    list_set_data(new_queue, val);
-    return head;
+    while(head->next != NULL){
+        display(head);
+        printf(" ");
+        head = head->next;
+    }
+    display(head);
+    return;
 }
-*/
-    
+
+void display_int(s_node * noeud){
+    printf("%d",(*(int*) noeud->val));
+}
