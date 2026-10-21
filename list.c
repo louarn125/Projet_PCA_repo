@@ -1,9 +1,6 @@
 #include "list.h"
 
-struct _list_node{
-    void * val;
-    s_node * next;
-};
+
 
 /**
  * prend un noeud en argument et retourne sa valeur
@@ -23,7 +20,10 @@ void list_set_data(s_node * node, void * data){
 
 s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void * param){
     s_node * iteration = *head;
-    while(iteration != NULL && compare(iteration,param)){
+    while(iteration->next != NULL && compare(iteration,param)){
+        iteration = iteration->next;
+    }
+    if(iteration == NULL){
 
     }
 }
