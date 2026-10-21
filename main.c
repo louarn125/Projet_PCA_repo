@@ -10,6 +10,9 @@ int main(){
   s_node* test_insert = list_insert(list, val);
   int* res = (int*) list_get_data(test_insert);
   printf("valeur de tête attendue : 2, valeur : %d\n", *res);
+  printf("-------------------- TEST list_append() ------------------------\n");
+  
+  
   printf("----------------------------------------------------------------\n");
   return 0;
 }
