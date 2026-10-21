@@ -61,6 +61,7 @@ void display_list(s_node *head, void (*display)(s_node*)){
         head = head->next;
     }
     display(head);
+    printf("\n");
     return;
 }
 
