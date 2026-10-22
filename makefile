@@ -1,5 +1,8 @@
-main: main.o
-	gcc main.o -o main
+main: main.o list.o
+	gcc main.o list.o -o main
 
-main.o: main.c
+main.o: main.c list.h
 	gcc -c main.c -o main.o
+
+list.o: list.c list.h
+	gcc -c list.c -o list.o
