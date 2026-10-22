@@ -19,22 +19,39 @@ void list_set_data(s_node * node, void * data){
     if(node != NULL) node->val = data;
     return;
 }
-/*
+
 s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void * param){
     if(head == NULL){
-        return head;
+        return NULL;
     }else if(*head == NULL){
-        return head;
+        return *head;
     }
     s_node * iteration = *head;
-    while(iteration->next != NULL && compare(iteration,param)){
+    //boucle
+    while(iteration->next != NULL && compare(iteration->next,param)<0){ // on check le suivant pas l'iterateur directement
         iteration = iteration->next;
     }
-    if(iteration == NULL){
-
+    //debut des tests post boucle
+    if(iteration->next != NULL){
+        if(compare(iteration,param)==0){// iterateur == param et iterateur->next > param
+            return iteration;
+        }else if(compare(iteration,param)>0){// pas rentré dans la boucle iterateur != param et iterateur->next > param si ite>param alors insert et pas dans la boucle
+            s_node * nv_head = list_insert(iteration,param);
+            head = &nv_head;
+            return nv_head;
+        }else if(compare(iteration,param)<0){// iterateur < param et iterateur->next > param
+            s_node * nv_noeud = (s_node*) malloc(sizeof(s_node));
+            list_set_data(nv_noeud,param);
+            nv_noeud->next = iteration->next;
+            iteration->next = nv_noeud;
+            return nv_noeud;
+        }
+    }else {// iterateur -> next == NULL donc append
+        list_append(iteration, param);
+        return iteration->next;
     }
 }
-    */
+
 s_node* list_create(){
     return NULL;
 }
@@ -61,6 +78,7 @@ void display_list(s_node *head, void (*display)(s_node*)){
         head = head->next;
     }
     display(head);
+    printf("\n");
     return;
 }
 
