@@ -2,6 +2,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * fonction d'affichage d'entier:
+ * prend en argument un noeud de liste
+ * affiche sur la sortie standart la valeur du noeud en argument.
+ */
+void display_int(s_node * noeud){
+    printf("%d",(*(int*) noeud->val));
+}
+
+/**
+ * fonction de comparaison d'entier:
+ * prend en argument un noeud de liste et une valeur data
+ * renvoi 1 si la valeur du noeud est supérieure a data
+ * renvoi 0 si la valeur du noeud est égal à data
+ * renvoi -1 si la valeur du noeud est inférieure à data
+ * renvoi 2 si la valeur du noeud et/ou data est NULL
+ */
+int comparer_int(s_node* node, void* data){
+    if(list_get_data(node)!=NULL && data!=NULL){
+        int* val1 = (int*)list_get_data(node);
+        int* val2 = (int*)data;
+        return 1*(val1-val2);
+    }
+    return 2;
+}
+
 int main(){
   s_node* list = list_create();
   printf("-------------------- TEST list_insert() ------------------------\n");

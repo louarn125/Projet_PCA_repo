@@ -27,7 +27,7 @@ s_node * list_next(s_node * node){
 }
 
 /**
- * prend en argument une tête de liste et une valeur
+ * prend en argument une tête de liste et une valeur et ajoute un nouveau noeud contenant la valeur en tête de liste, renvoi la nouvelle tête de liste
  */
 s_node* list_insert(s_node* head, void* val){
     s_node* new_head = (s_node*)malloc(sizeof(s_node));
@@ -41,6 +41,9 @@ s_node* list_insert(s_node* head, void* val){
     }
 }
 
+/**
+ * prend en argument un tête de liste et une valeur et ajoute un nouveau noeud contenant la valeur en queue de liste, renvoi la tête de liste
+ */
 s_node* list_append(s_node* head, void* val){
     s_node* new_queue = (s_node*)malloc(sizeof(s_node));
     if(new_queue == NULL) return head;
@@ -60,6 +63,10 @@ s_node* list_append(s_node* head, void* val){
     }
 }
 
+/**
+ * prend en argument un s_node** vers une tête de liste, un pointeur vers une fonction de comparaison et une valeur,
+ * si un noeud contenant la valeur existe déjà, ce noeud est renvoyé, un nouveau noeud contenant la valeur est créé et renvoyé sinon. 
+ */
 s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void * param){
     if(head == NULL){
         return list_insert(list_create(),param);
@@ -99,6 +106,10 @@ s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void
     return iteration->next;
 }
 
+/**
+ * prend en argument une tête de liste et une valeur, supprime la première instance de valeur dans la liste,
+ * et renvoi la tête de liste, modifiée si nécessaire.
+ */
 s_node * list_remove(s_node *head, void *data){
     if(head!=NULL){
         s_node * cur = head;
@@ -121,6 +132,9 @@ s_node * list_remove(s_node *head, void *data){
     return head;
 }
 
+/**
+ * prend en argument une tête de liste, supprime la tête de liste et renvoi la nouvelle tête après suppression.
+ */
 s_node * list_headRemove(s_node * head){
     if(head == NULL){
         return NULL;
@@ -131,6 +145,12 @@ s_node * list_headRemove(s_node * head){
     return temp; 
 }
 
+/**
+ * prend en argument une tête de liste
+ * détruit la liste en libérant l'espace mémoire
+ * ne s'occupe pas de libérer l'espace occupé par les valeurs dans les noeuds
+ * ne renvoi rien
+ */
 void list_destroy(s_node *head){
     if(head!=NULL){
         s_node * cur = head;
@@ -147,6 +167,10 @@ void list_destroy(s_node *head){
     }
 }
 
+/**
+ * prends en argument une tête de liste et un pointeur de fonction d'affichage
+ * affiche sur la sortie standart les valeurs de la liste tel qu'elles sont ordonnées dans la liste.
+ */
 void display_list(s_node *head, void (*display)(s_node*)){
     if(head == NULL){
         return;
@@ -161,15 +185,3 @@ void display_list(s_node *head, void (*display)(s_node*)){
     return;
 }
 
-void display_int(s_node * noeud){
-    printf("%d",(*(int*) noeud->val));
-}
-
-int comparer_int(s_node* node, void* data){
-    if(list_get_data(node)!=NULL){
-        int* val1 = (int*)list_get_data(node);
-        int* val2 = (int*)data;
-        return 1*(val1-val2);
-    }
-    return 2;
-}
