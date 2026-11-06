@@ -22,9 +22,11 @@ void list_set_data(s_node * node, void * data){
 
 s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void * param){
     if(head == NULL){
-        return NULL;
+        return list_insert(list_create(),param);
     }else if(*head == NULL){
-        return *head;
+        s_node * temp = list_insert(*head,param);
+        *head = temp;
+        return temp;
     }
     s_node * iteration = *head;
     //boucle
@@ -37,10 +39,16 @@ s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void
             return iteration;
         }else if(compare(iteration,param)>0){// pas rentré dans la boucle iterateur != param et iterateur->next > param si ite>param alors insert et pas dans la boucle
             s_node * nv_head = list_insert(iteration,param);
-            head = &nv_head;
+            if(nv_head == iteration){
+                return NULL;
+            }
+            *head = nv_head;
             return nv_head;
         }else if(compare(iteration,param)<0){// iterateur < param et iterateur->next > param
             s_node * nv_noeud = (s_node*) malloc(sizeof(s_node));
+            if(nv_noeud == NULL){
+                return NULL;
+            }
             list_set_data(nv_noeud,param);
             nv_noeud->next = iteration->next;
             iteration->next = nv_noeud;
