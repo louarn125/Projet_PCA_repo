@@ -20,12 +20,9 @@ void display_int(s_node * noeud){
  * renvoi 2 si la valeur du noeud et/ou data est NULL
  */
 int comparer_int(s_node* node, void* data){
-    if(list_get_data(node)!=NULL && data!=NULL){
-        int* val1 = (int*)list_get_data(node);
-        int* val2 = (int*)data;
-        return 1*(val1-val2);
-    }
-    return 2;
+  int* val1 = (int*)list_get_data(node);
+  int* val2 = (int*)data;
+  return (*val1)-(*val2);
 }
 
 int main(){
@@ -88,8 +85,7 @@ int main(){
   printf("list d'origine:\n");
   display_list(*temp_list,display_int);
   s_node* v_sup1 = list_headRemove(*temp_list);
-  int aff = *((int*) list_get_data(v_sup1));
-  printf("valeur supprime: %d\n",aff);
+  *temp_list = v_sup1;
   printf("liste:\n");
   display_list(*temp_list,display_int);
   printf("-------------------- TEST list_destroy() -----------------------\n");
@@ -97,7 +93,7 @@ int main(){
   display_list(*temp_list,display_int);
   printf("suppression de la liste:\n");
   list_destroy(*temp_list);
-  display_list(*temp_list,display_int);
+  temp_list = NULL;
   printf("----------------------------------------------------------------\n");
   return 0;
 }

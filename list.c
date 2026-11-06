@@ -80,6 +80,7 @@ s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void
     //boucle
     while(iteration->next != NULL && compare(iteration->next,param)<0){ // on check le suivant pas l'iterateur directement
         iteration = iteration->next;
+        printf("test\n");
     }
     //debut des tests post boucle
     if(iteration->next != NULL){
@@ -113,14 +114,15 @@ s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void
         if(*head!=NULL){
             s_node * cur = *head;
             s_node * prev = NULL;
-            while(compare(cur->val,param)<0 && cur->next != NULL){
+            while(compare(cur,param)<0 && cur->next != NULL){
                 prev = cur;
                 cur = cur->next;
+                printf("tkt\n");
             }
-            if(compare(cur->val,param)==0){
+            if(compare(cur,param)==0){
                 return cur;
             }
-            if(compare(cur->val,param)>0){
+            if(compare(cur,param)>0){
                 s_node * new_node = list_insert(cur,param);
                 if(new_node==cur){
                     return NULL;
