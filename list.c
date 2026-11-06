@@ -54,10 +54,9 @@ s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void
             iteration->next = nv_noeud;
             return nv_noeud;
         }
-    }else {// iterateur -> next == NULL donc append
-        list_append(iteration, param);
-        return iteration->next;
-    }
+    }// iterateur -> next == NULL donc append
+    list_append(iteration, param);
+    return iteration->next;
 }
 
 s_node* list_create(){
