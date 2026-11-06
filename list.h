@@ -18,6 +18,6 @@ s_node * list_next(s_node * node);
 void list_destroy(s_node * head);
 void display_list(s_node * head, void(*display)(s_node*));
 void display_int(s_node * noeud);
-int comparer(s_node* node, void* data);
+int comparer_int(s_node* node, void* data);
 
 #endif

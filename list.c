@@ -26,6 +26,9 @@ s_node * list_next(s_node * node){
     return node->next;
 }
 
+/**
+ * prend en argument une tête de liste et une valeur
+ */
 s_node* list_insert(s_node* head, void* val){
     s_node* new_head = (s_node*)malloc(sizeof(s_node));
     if(new_head!=NULL){
