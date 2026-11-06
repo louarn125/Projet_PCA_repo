@@ -88,7 +88,8 @@ int main(){
   printf("list d'origine:\n");
   display_list(*temp_list,display_int);
   s_node* v_sup1 = list_headRemove(*temp_list);
-  printf("valeur supprime: %d\n",v_sup1);
+  int aff = *((int*) list_get_data(v_sup1));
+  printf("valeur supprime: %d\n",aff);
   printf("liste:\n");
   display_list(*temp_list,display_int);
   printf("-------------------- TEST list_destroy() -----------------------\n");
