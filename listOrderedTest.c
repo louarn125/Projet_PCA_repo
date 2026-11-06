@@ -3,16 +3,26 @@ s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void
         if(*head!=NULL){
             s_node * cur = head;
             s_node * prev = NULL;
-            while(compare(cur,param)<0 && cur->next != NULL){
+            while(compare(cur->val,param)<0 && cur->next != NULL){
                 prev = cur;
                 cur = cur->next;
             }
-            if(compare(cur,param)==0){
+            if(compare(cur->val,param)==0){
                 return cur;
             }
-            if(compare(cur,param)>0){
-                prev->next = list_insert(cur, param);
-                return prev->next;
+            if(compare(cur->val,param)>0){
+                s_node * new_node = list_insert(cur,param);
+                if(new_node==cur){
+                    return NULL;
+                }
+                if(prev!=NULL){
+                    prev->next = new_node;
+                    return prev->next;
+                }
+                else{
+                    *head = new_node;
+                    return *head;
+                }
             }
             list_append(*head, param);
             return cur->next;

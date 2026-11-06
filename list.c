@@ -76,6 +76,22 @@ s_node* list_insert(s_node* head, void* val){
     }
 }
 
+s_node * list_remove(s_node *head, void *data){
+    if(head!=NULL){
+        s_node * cur = head;
+        s_node * prev = NULL;
+        while(cur->val!=data && cur->next!=NULL){
+            prev = cur;
+            cur = cur->next;
+        }
+        if(cur->val==data){
+            prev->next = cur->next;
+            free(cur);
+        }
+    }
+    return head;
+}
+
 void display_list(s_node *head, void (*display)(s_node*)){
     if(head == NULL){
         return;
