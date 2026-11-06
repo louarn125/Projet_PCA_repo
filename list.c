@@ -111,7 +111,7 @@ s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void
 s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void * param){
     if(head!=NULL){
         if(*head!=NULL){
-            s_node * cur = head;
+            s_node * cur = *head;
             s_node * prev = NULL;
             while(compare(cur->val,param)<0 && cur->next != NULL){
                 prev = cur;
