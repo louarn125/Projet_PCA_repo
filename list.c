@@ -161,3 +161,12 @@ void display_list(s_node *head, void (*display)(s_node*)){
 void display_int(s_node * noeud){
     printf("%d",(*(int*) noeud->val));
 }
+
+int comparer_int(s_node* node, void* data){
+    if(list_get_data(node)!=NULL){
+        int* val1 = (int*)list_get_data(node);
+        int* val2 = (int*)data;
+        return 1*(val1-val2);
+    }
+    return 2;
+}
