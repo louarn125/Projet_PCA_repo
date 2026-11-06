@@ -1,19 +1,20 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "list.h"
 
 s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void * param){
     if(head!=NULL){
         if(*head!=NULL){
-            s_node * cur = head;
+            s_node * cur = *head;
             s_node * prev = NULL;
-            while(compare(cur->val,param)<0 && cur->next != NULL){
+            while(compare(cur,param)<0 && cur->next != NULL){
                 prev = cur;
                 cur = cur->next;
             }
-            if(compare(cur->val,param)==0){
+            if(compare(cur,param)==0){
                 return cur;
             }
-            if(compare(cur->val,param)>0){
+            if(compare(cur,param)>0){
                 s_node * new_node = list_insert(cur,param);
                 if(new_node==cur){
                     return NULL;
@@ -31,7 +32,10 @@ s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void
             return cur->next;
         }
         else{
-            return list_append(*head, param);
+            //return list_append(*head, param);
+            s_node * temp = list_insert(*head,param);
+            *head = temp;
+            return temp;
         }
     }
     else{
