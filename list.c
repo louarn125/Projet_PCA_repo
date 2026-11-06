@@ -85,11 +85,43 @@ s_node * list_remove(s_node *head, void *data){
             cur = cur->next;
         }
         if(cur->val==data){
-            prev->next = cur->next;
+            if(prev!=NULL){
+                prev->next = cur->next;
+            }
+            else{
+                head = cur->next;
+            }
             free(cur);
+            cur = NULL;
         }
     }
     return head;
+}
+
+s_node * list_headRemove(s_node * head){
+    if(head == NULL){
+        return NULL;
+    }
+    s_node * temp = head->next;
+    free(head);
+    head = NULL;
+    return temp; 
+}
+
+void list_destroy(s_node *head){
+    if(head!=NULL){
+        s_node * cur = head;
+        s_node * prev = NULL;
+        while(cur->next!=NULL){
+            prev = cur;
+            cur = cur->next;
+            free(prev);
+            prev = NULL;
+        }
+        free(cur);
+        cur = NULL;
+        head = NULL;
+    }
 }
 
 void display_list(s_node *head, void (*display)(s_node*)){
@@ -109,6 +141,7 @@ void display_list(s_node *head, void (*display)(s_node*)){
 void display_int(s_node * noeud){
     printf("%d",(*(int*) noeud->val));
 }
+
 s_node* list_append(s_node* head, void* val){
     s_node* new_queue = (s_node*)malloc(sizeof(s_node));
     if(new_queue == NULL) return head;
