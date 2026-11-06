@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include "list.h"
+
 s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void * param){
     if(head!=NULL){
         if(*head!=NULL){
@@ -34,4 +37,14 @@ s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void
     else{
         return list_insert(list_create(), param);
     }
+}
+
+s_node * list_headRemove(s_node * head){
+    if(head == NULL){
+        return NULL;
+    }
+    s_node * temp = head->next;
+    free(head);
+    head = NULL;
+    return temp; 
 }
