@@ -138,7 +138,10 @@ s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void
             return cur->next;
         }
         else{
-            return list_append(*head, param);
+            //return list_append(*head, param);
+            s_node * temp = list_insert(*head,param);
+            *head = temp;
+            return temp;
         }
     }
     else{
