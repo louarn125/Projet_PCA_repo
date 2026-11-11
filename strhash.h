@@ -5,12 +5,11 @@
 typedef struct hashtable{
     s_node** tab;
     int taille;
-    int nb_elt;
 } hashtable;
 
 hashtable* create_hashtable(int taille); 
-void destroy_hashtable(hashtable* tab); 
-void free_hashtable_data(hashtable* tab); 
+hashtable* destroy_hashtable(hashtable* tab); 
+hashtable* free_hashtable_data(hashtable* tab); 
 void add_mot(hashtable* tab, char* mot); 
 void del_mot(hashtable* tab, char* mot); 
 void display_stats(hashtable* tab);
