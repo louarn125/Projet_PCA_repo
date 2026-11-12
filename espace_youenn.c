@@ -1,5 +1,6 @@
 #include "strhash.h"
 #include <stdlib.h>
+#include <string.h>
 
 void destroy_hashtable(hashtable* table){
     free_hashtable_data(table);
@@ -17,4 +18,10 @@ void free_hashtable_data(hashtable* table){
         list_destroy(table->tab[i]);
         table->tab[i] = NULL;
     }
+}
+
+void del_mot(hashtable* table, char* mot){
+    char* temp = add_mot(table,mot);
+    int tkt = cle(temp,table->taille);
+    list_remove(table->tab[tkt],temp);
 }
