@@ -7,6 +7,7 @@ typedef struct hashtable{
     int taille;
 } hashtable;
 
+static int cle(char* mot, int taille);
 hashtable* create_hashtable(int taille); 
 hashtable* destroy_hashtable(hashtable* tab); 
 hashtable* free_hashtable_data(hashtable* tab); 
