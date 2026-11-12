@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <math.h>
 
 static int cle(char* mot, int taille){
     int cle = 0;
@@ -57,7 +58,7 @@ void display_stats(hashtable* table){
         }
         double moy = nb_elt/somme;
         printf("%f   %f",ec_type, moy);
-        ec_type = (ec_type/somme)-(moy*moy);
+        ec_type = sqrt(ec_type/somme-moy*moy);
         printf("Statistiques de la table de hachage :\n");
         printf("------------------------------------");
         printf("Nombre total de mots : %d\n",nb_elt);
