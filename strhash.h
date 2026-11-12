@@ -2,8 +2,13 @@
 #define _STRHASH_
 #include "list.h"
 
-typedef struct hashtable{
+typedef struct element{
     s_node** tab;
+    int taille;
+} element;
+
+typedef struct hashtable{
+    element elt;
     int taille;
 } hashtable;
 
