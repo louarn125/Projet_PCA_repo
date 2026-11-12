@@ -1,5 +1,6 @@
 #include "strhash.h"
 #include <stdlib.h>
+#include <string.h>
 
 static int cle(char* mot, int taille){
     int cle = 0;
@@ -17,6 +18,9 @@ hashtable* create_hashtable(int taille){
         s_node** table = (s_node**)malloc(taille*sizeof(s_node*));
         if(table!=NULL){
             htab->tab = table;
+            for(int i = 0; i<taille; i++){
+                htab->tab[i]=list_create();
+            }
             htab->taille = taille;
             return htab;
         }
@@ -24,3 +28,13 @@ hashtable* create_hashtable(int taille){
     }
     return NULL;
 }
+
+char* add_mot(hashtable* tab, char* mot){
+    int key = cle(mot, tab->taille);
+    char* copyM = strdup(mot);
+    s_node* noeud = list_orderedAppend(tab->tab[key],strcmp, copyM);
+    return list_get_data(noeud);
+}
+
+
+
