@@ -1,6 +1,7 @@
 #include "strhash.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 static int cle(char* mot, int taille){
     int cle = 0;
@@ -62,6 +63,6 @@ void display_stats(hashtable* table){
     printf("------------------------------------");
     printf("Tailles de listes de mots\n-- MIN : %d\n-- MAX : %d\n",min , max);
     printf("------------------------------------");
-    printf("Écart type :\n",ec_type);
+    printf("Écart type :%d\n",ec_type);
 }
 
