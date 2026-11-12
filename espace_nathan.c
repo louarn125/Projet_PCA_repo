@@ -45,24 +45,29 @@ char* add_mot(hashtable* tab, char* mot){
 }
 
 void display_stats(hashtable* table){
-    int nb_elt = 1, min = table->elt[0].taille, max = table->elt[0].taille;
-    double ec_type=min*min, somme=1;
-    for(int i = 1; i<table->taille; i++){
-        int taille = table->elt[i].taille;
-        if(taille>max){max=taille;}
-        if(taille<min){min=taille;}
-        nb_elt+=taille;
-        somme++;
-        ec_type+=taille*taille;
+    if(table!=NULL){
+        int nb_elt = 1, min = table->elt[0].taille, max = table->elt[0].taille;
+        double ec_type=min*min, somme=1;
+        for(int i = 1; i<table->taille; i++){
+            int taille = table->elt[i].taille;
+            if(taille>max){max=taille;}
+            if(taille<min){min=taille;}
+            nb_elt+=taille;
+            somme++;
+            ec_type+=taille*taille;
+        }
+        double moy = nb_elt/somme;
+        ec_type = (ec_type/somme)-(moy*moy);
+        printf("Statistiques de la table de hachage :\n");
+        printf("------------------------------------");
+        printf("Nombre total de mots : %d\n",nb_elt);
+        printf("------------------------------------");
+        printf("Tailles de listes de mots\n-- MIN : %d\n-- MAX : %d\n",min , max);
+        printf("------------------------------------");
+        printf("Écart type :%f\n",ec_type);
     }
-    double moy = nb_elt/somme;
-    ec_type = (ec_type/somme)-(moy*moy);
-    printf("Statistiques de la table de hachage :\n");
-    printf("------------------------------------");
-    printf("Nombre total de mots : %d\n",nb_elt);
-    printf("------------------------------------");
-    printf("Tailles de listes de mots\n-- MIN : %d\n-- MAX : %d\n",min , max);
-    printf("------------------------------------");
-    printf("Écart type :%f\n",ec_type);
+    else{
+        printf("La table de hachage n'existe pas");
+    }
 }
 
