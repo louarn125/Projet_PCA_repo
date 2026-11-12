@@ -91,10 +91,17 @@ void free_hashtable_data(hashtable* table){
 }
 
 void del_mot(hashtable* table, char* mot){
-    char* temp = add_mot(table,mot);
-    int tkt = cle(temp,table->taille);
-    table->elt[tkt].tab = list_remove(table->elt[tkt].tab,temp);
-    table->elt[tkt].taille-=1;
+    int tkt = cle(mot,table->taille);
+    char * temp;
+    s_node * cur = table->elt[tkt].tab;
+    while(cur != NULL && strcmp_list(cur,mot)){
+        cur = list_next(cur);
+    }
+    if(cur != NULL){
+        temp = list_get_data(cur);
+        table->elt[tkt].tab = list_remove(table->elt[tkt].tab,temp);
+        table->elt[tkt].taille-=1;
+    }
 }
 
 int strcmp_list(s_node* noeud, void* mot){
