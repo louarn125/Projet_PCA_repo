@@ -4,7 +4,7 @@
 
 void destroy_hashtable(hashtable* table){
     free_hashtable_data(table);
-    free(table->tab);
+    free(table->elt->tab);
     free(table);
 }
 

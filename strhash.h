@@ -3,12 +3,12 @@
 #include "list.h"
 
 typedef struct element{
-    s_node** tab;
+    s_node* tab;
     int taille;
 } element;
 
 typedef struct hashtable{
-    element elt;
+    element * elt;
     int taille;
 } hashtable;
 
