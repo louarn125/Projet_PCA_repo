@@ -10,18 +10,18 @@ void destroy_hashtable(hashtable* table){
 
 void free_hashtable_data(hashtable* table){
     for(int i = 0; i<table->taille;i++){
-        s_node * head = table->tab[i];
+        s_node * head = table->elt->tab[i];
         while(head != NULL){
             free(list_get_data(head));
             head = list_next(head);
         }
-        list_destroy(table->tab[i]);
-        table->tab[i] = NULL;
+        list_destroy(table->elt->tab[i]);
+        table->elt->tab[i] = NULL;
     }
 }
 
 void del_mot(hashtable* table, char* mot){
     char* temp = add_mot(table,mot);
     int tkt = cle(temp,table->taille);
-    list_remove(table->tab[tkt],temp);
+    list_remove(table->elt->tab[tkt],temp);
 }
