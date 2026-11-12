@@ -5,7 +5,7 @@
 
 static int cle(char* mot, int taille){
     int cle = 0;
-    for(int i = 0; i>strlen(mot); i++){
+    for(int i = 0; i<strlen(mot); i++){
         cle*=2;
         cle+=mot[i];
     }

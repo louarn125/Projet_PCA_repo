@@ -2,5 +2,5 @@ list.o
 main
 main.o
 strhash.o
-test_strhash.o
 test_strhash
+test_strhash.o

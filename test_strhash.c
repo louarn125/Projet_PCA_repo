@@ -8,6 +8,7 @@ void display_char_tab(s_node * noeud){
 
 void affichage_hashtable(hashtable * table){
     for(int i = 0; i < table->taille;i++){
+        printf("%d\n",i);
         display_list(table->elt[i].tab,display_char_tab);
     }
 }
@@ -44,6 +45,9 @@ int main(){
     printf("ajout du mot bonjour\n");
     char* str6 = add_mot(table_hash,"bonjour");
     printf("affichage du mot: '%s' et de sont adresse: '%p'\n",str6,str6);
+
+    printf("affichage de la table de hachage\n");
+    affichage_hashtable(table_hash);
 
     return 0;
 }
