@@ -15,13 +15,13 @@ void free_hashtable_data(hashtable* table){
             free(list_get_data(head));
             head = list_next(head);
         }
-        list_destroy(table->elt[i]->tab);
-        table->elt->tab[i] = NULL;
+        list_destroy(table->elt[i].tab);
+        table->elt[i].tab = NULL;
     }
 }
 
 void del_mot(hashtable* table, char* mot){
     char* temp = add_mot(table,mot);
     int tkt = cle(temp,table->taille);
-    list_remove(table->elt->tab[tkt],temp);
+    list_remove(table->elt[tkt].tab,temp);
 }

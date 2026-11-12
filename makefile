@@ -6,3 +6,12 @@ main.o: main.c list.h
 
 list.o: list.c list.h
 	gcc -Wall -Werror=vla -c list.c -o list.o
+
+strhash: test_strhash.o strhash.o list.o
+	gcc test_strhash.o strhash.o list.o -o test_strhash
+
+strhash.o: strhash.c strhash.h
+	gcc -Wall -Werror=vla -c strhash.c -o strhash.o
+
+test_strhash.o: test_strhash.c strhash.h
+	gcc -Wall -Werror=vla -c test_strhash.c -o test_strhash.o
