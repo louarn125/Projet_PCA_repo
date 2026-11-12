@@ -20,7 +20,7 @@ hashtable* create_hashtable(int taille){
             htab->elt = elt;
             for(int i = 0; i<taille; i++){
                 htab->elt[i].tab=list_create();
-                htab->elt[i];
+                htab->elt[i].taille=0;
             }
             htab->taille = taille;
             return htab;
@@ -33,8 +33,14 @@ hashtable* create_hashtable(int taille){
 char* add_mot(hashtable* tab, char* mot){
     int key = cle(mot, tab->taille);
     char* copyM = strdup(mot);
-    s_node* noeud = list_orderedAppend(&(tab->elt[key]),strcmp, copyM);
-    return list_get_data(noeud);
+    s_node* noeud = list_orderedAppend(&(tab->elt[key].tab),strcmp, copyM);
+    if(noeud!=NULL){
+        if(list_get_data(noeud)==copyM){
+            tab->elt[key].taille++;
+        }
+        return list_get_data(noeud);
+    }
+    return mot;
 }
 
 void display_stats(hashtable* table){
