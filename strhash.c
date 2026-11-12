@@ -47,16 +47,16 @@ char* add_mot(hashtable* tab, char* mot){
 void display_stats(hashtable* table){
     if(table!=NULL){
         int nb_elt = table->elt[0].taille, min = table->elt[0].taille, max = table->elt[0].taille;
-        double ec_type=min*min, somme=1;
+        double ec_type=nb_elt*nb_elt, somme=table->taille;
         for(int i = 1; i<table->taille; i++){
             int taille = table->elt[i].taille;
             if(taille>max){max=taille;}
             if(taille<min){min=taille;}
             nb_elt+=taille;
-            somme++;
             ec_type+=taille*taille;
         }
         double moy = nb_elt/somme;
+        printf("%f   %f",ec_type, moy);
         ec_type = (ec_type/somme)-(moy*moy);
         printf("Statistiques de la table de hachage :\n");
         printf("------------------------------------");
