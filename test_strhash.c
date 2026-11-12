@@ -64,5 +64,34 @@ int main(){
     printf("affichage de la table de hachage\n");
     affichage_hashtable(table_hash);
 
+//free
+    printf("liberation des donnees\n");
+    free_hashtable_data(table_hash);
+    printf("affichage de la table de hachage\n");
+    affichage_hashtable(table_hash);
+
+    printf("ajout du mot salut\n");
+    str2 = add_mot(table_hash,"salut");
+    printf("affichage du mot: '%s' et de sont adresse: '%p'\n",str2,str2);
+    
+    printf("ajout du mot voiture\n");
+    str3 = add_mot(table_hash,"voiture");
+    printf("affichage du mot: '%s' et de sont adresse: '%p'\n",str3,str3);
+
+    printf("ajout du mot manger\n");
+    str4 = add_mot(table_hash,"manger");
+    printf("affichage du mot: '%s' et de sont adresse: '%p'\n",str4,str4);
+
+    printf("ajout du mot chemin\n");
+    str5 = add_mot(table_hash,"chemin");
+    printf("affichage du mot: '%s' et de sont adresse: '%p'\n",str5,str5);
+
+    printf("ajout du mot bonjour\n");
+    str6 = add_mot(table_hash,"bonjour");
+    printf("affichage du mot: '%s' et de sont adresse: '%p'\n",str6,str6);
+
+    printf("affichage de la table de hachage\n");
+    affichage_hashtable(table_hash);
+
     return 0;
 }
