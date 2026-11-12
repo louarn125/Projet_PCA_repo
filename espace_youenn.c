@@ -10,12 +10,12 @@ void destroy_hashtable(hashtable* table){
 
 void free_hashtable_data(hashtable* table){
     for(int i = 0; i<table->taille;i++){
-        s_node * head = table->elt->tab[i];
+        s_node * head = table->elt[i].tab;
         while(head != NULL){
             free(list_get_data(head));
             head = list_next(head);
         }
-        list_destroy(table->elt->tab[i]);
+        list_destroy(table->elt[i]->tab);
         table->elt->tab[i] = NULL;
     }
 }
