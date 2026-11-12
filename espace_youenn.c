@@ -23,7 +23,7 @@ void free_hashtable_data(hashtable* table){
 void del_mot(hashtable* table, char* mot){
     char* temp = add_mot(table,mot);
     int tkt = cle(temp,table->taille);
-    list_remove(table->elt[tkt].tab,temp);
+    table->elt[tkt].tab = list_remove(table->elt[tkt].tab,temp);
     table->elt[tkt].taille-=1;
 }
 

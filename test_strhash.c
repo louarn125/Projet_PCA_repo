@@ -49,5 +49,20 @@ int main(){
     printf("affichage de la table de hachage\n");
     affichage_hashtable(table_hash);
 
+    display_stats(table_hash);
+
+//suppression d'un mot
+    printf("suppression de manger\n");
+    del_mot(table_hash,"manger");
+
+    printf("suppression de voiture\n");
+    del_mot(table_hash,"voiture");
+
+    printf("suppression de voiture\n");
+    del_mot(table_hash,"voiture");    
+
+    printf("affichage de la table de hachage\n");
+    affichage_hashtable(table_hash);
+
     return 0;
 }
