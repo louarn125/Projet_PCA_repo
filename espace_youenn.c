@@ -1,7 +1,7 @@
 #include "strhash.h"
 #include <stdlib.h>
 
-hashtable* destroy_hashtable(hashtable* table){
+void destroy_hashtable(hashtable* table){
     free_hashtable_data(table);
     free(table->tab);
     free(table);
