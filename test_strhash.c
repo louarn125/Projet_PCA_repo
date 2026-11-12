@@ -93,5 +93,11 @@ int main(){
     printf("affichage de la table de hachage\n");
     affichage_hashtable(table_hash);
 
+    printf("destroy de la table\n");
+    destroy_hashtable(table_hash);
+
+    printf("affichage de la table de hachage\n");
+    affichage_hashtable(table_hash);
+
     return 0;
 }
