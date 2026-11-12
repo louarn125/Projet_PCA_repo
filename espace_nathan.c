@@ -63,6 +63,6 @@ void display_stats(hashtable* table){
     printf("------------------------------------");
     printf("Tailles de listes de mots\n-- MIN : %d\n-- MAX : %d\n",min , max);
     printf("------------------------------------");
-    printf("Écart type :%d\n",ec_type);
+    printf("Écart type :%f\n",ec_type);
 }
 
