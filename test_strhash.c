@@ -16,9 +16,12 @@ void affichage_hashtable(hashtable * table){
 int main(){
     printf("Test lib strhash.h\n");
     hashtable* table_hash = create_hashtable(8);
+    hashtable* table_hash2 = create_hashtable(10);
+    hashtable* table_hash3 = create_hashtable(2);
     printf("affichage de la table de hachage\n");
     affichage_hashtable(table_hash);
 //ajout de mot type
+    printf("---------------------TEST ADD_MOT------------------------\n");
     printf("ajout du mot bonjour\n");
     char* str1 = add_mot(table_hash,"bonjour");
     printf("affichage du mot: '%s' et de sont adresse: '%p'\n",str1,str1);
@@ -49,8 +52,10 @@ int main(){
     printf("affichage de la table de hachage\n");
     affichage_hashtable(table_hash);
 
+    printf("---------------------TEST DISPLAY_STATS------------------------\n");
     display_stats(table_hash);
 
+    printf("---------------------TEST DEL_MOT------------------------\n");
 //suppression d'un mot
     printf("suppression de manger\n");
     del_mot(table_hash,"manger");
@@ -64,6 +69,7 @@ int main(){
     printf("affichage de la table de hachage\n");
     affichage_hashtable(table_hash);
 
+    printf("---------------------TEST LIBERATION DONNÉES------------------------\n");
 //free
     printf("liberation des donnees\n");
     free_hashtable_data(table_hash);
@@ -93,6 +99,7 @@ int main(){
     printf("affichage de la table de hachage\n");
     affichage_hashtable(table_hash);
 
+    printf("---------------------TEST DESTROY------------------------\n");
     printf("destroy de la table\n");
     destroy_hashtable(table_hash);
 
