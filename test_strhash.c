@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-display_char_tab(s_node * noeud){
+void display_char_tab(s_node * noeud){
     printf("%s",((char*) list_get_data(noeud)));
 }
 
@@ -20,30 +20,30 @@ int main(){
 //ajout de mot type
     printf("ajout du mot bonjour\n");
     char* str1 = add_mot(table_hash,"bonjour");
-    printf("affichage du mot: '%s' et de sont adresse: '%d'\n",str1,str1);
+    printf("affichage du mot: '%s' et de sont adresse: '%p'\n",str1,str1);
 //affichage de hashtable type
     printf("affichage de la table de hachage\n");
     affichage_hashtable(table_hash);
 
     printf("ajout du mot salut\n");
     char* str2 = add_mot(table_hash,"salut");
-    printf("affichage du mot: '%s' et de sont adresse: '%d'\n",str1,str1);
+    printf("affichage du mot: '%s' et de sont adresse: '%p'\n",str2,str2);
     
     printf("ajout du mot voiture\n");
     char* str3 = add_mot(table_hash,"voiture");
-    printf("affichage du mot: '%s' et de sont adresse: '%d'\n",str1,str1);
+    printf("affichage du mot: '%s' et de sont adresse: '%p'\n",str3,str3);
 
     printf("ajout du mot manger\n");
     char* str4 = add_mot(table_hash,"manger");
-    printf("affichage du mot: '%s' et de sont adresse: '%d'\n",str1,str1);
+    printf("affichage du mot: '%s' et de sont adresse: '%p'\n",str4,str4);
 
     printf("ajout du mot chemin\n");
     char* str5 = add_mot(table_hash,"chemin");
-    printf("affichage du mot: '%s' et de sont adresse: '%d'\n",str1,str1);
+    printf("affichage du mot: '%s' et de sont adresse: '%p'\n",str5,str5);
 
     printf("ajout du mot bonjour\n");
     char* str6 = add_mot(table_hash,"bonjour");
-    printf("affichage du mot: '%s' et de sont adresse: '%d'\n",str1,str1);
+    printf("affichage du mot: '%s' et de sont adresse: '%p'\n",str6,str6);
 
     return 0;
 }

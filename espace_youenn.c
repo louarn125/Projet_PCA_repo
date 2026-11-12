@@ -26,3 +26,7 @@ void del_mot(hashtable* table, char* mot){
     list_remove(table->elt[tkt].tab,temp);
     table->elt[tkt].taille-=1;
 }
+
+int strcmp_list(s_node* noeud, void* mot){
+    return strcmp(((char*)list_get_data(noeud)),((char*)mot));
+}

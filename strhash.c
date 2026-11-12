@@ -21,7 +21,7 @@ hashtable* create_hashtable(int taille){
             htab->elt = elt;
             for(int i = 0; i<taille; i++){
                 htab->elt[i].tab=list_create();
-                htab->elt[i].taille = 0;
+                htab->elt[i].taille=0;
             }
             htab->taille = taille;
             return htab;
@@ -34,10 +34,14 @@ hashtable* create_hashtable(int taille){
 char* add_mot(hashtable* tab, char* mot){
     int key = cle(mot, tab->taille);
     char* copyM = strdup(mot);
-    s_node* noeud = list_orderedAppend(&(tab->elt[key]),strcmp, copyM);
-    //temporaire:
-    tab->elt[key].taille+=1;
-    return list_get_data(noeud);
+    s_node* noeud = list_orderedAppend(&(tab->elt[key].tab),strcmp_list, copyM);
+    if(noeud!=NULL){
+        if(list_get_data(noeud)==copyM){
+            tab->elt[key].taille++;
+        }
+        return list_get_data(noeud);
+    }
+    return mot;
 }
 
 void display_stats(hashtable* table){
@@ -59,7 +63,7 @@ void display_stats(hashtable* table){
     printf("------------------------------------");
     printf("Tailles de listes de mots\n-- MIN : %d\n-- MAX : %d\n",min , max);
     printf("------------------------------------");
-    printf("Écart type :\n",ec_type);
+    printf("Écart type :%f\n",ec_type);
 }
 
 void destroy_hashtable(hashtable* table){
@@ -84,4 +88,8 @@ void del_mot(hashtable* table, char* mot){
     char* temp = add_mot(table,mot);
     int tkt = cle(temp,table->taille);
     list_remove(table->elt[tkt].tab,temp);
+}
+
+int strcmp_list(s_node* noeud, void* mot){
+    return strcmp(((char*)list_get_data(noeud)),((char*)mot));
 }
