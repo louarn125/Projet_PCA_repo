@@ -71,3 +71,9 @@ void display_stats(hashtable* table){
     }
 }
 
+
+void del_mot(hashtable* table, char* mot){
+    int key = cle(mot,table->taille);
+    table->elt[key].tab=list_remove(table->elt[key].tab, (void*) mot);
+}
+
