@@ -5,3 +5,6 @@ strhash.o
 test_strhash
 test_strhash.o
 .vscode
+jeton
+jeton_test.o
+jeton.o

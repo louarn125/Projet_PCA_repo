@@ -15,3 +15,12 @@ strhash.o: strhash.c strhash.h
 
 test_strhash.o: test_strhash.c strhash.h
 	gcc -Wall -Werror=vla -c test_strhash.c -o test_strhash.o
+
+jeton: jeton_test.o jeton.o
+	gcc jeton_test.o jeton.o -o jeton
+
+jeton.o: jeton.c jeton.h
+	gcc -Wall -Werror=vla -c jeton.c -o jeton.o
+
+jeton_test.o: jeton_test.c jeton.h
+	gcc -Wall -Werror=vla -c jeton_test.c -o jeton_test.o
