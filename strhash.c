@@ -10,7 +10,7 @@ static int strcmp_list(s_node* noeud, void* mot){
 
 static int cle(char* mot, int taille){
     int cle = 0;
-    for(int i = 0; i<strlen(mot); i++){
+    for(int i = 0; mot[i]!='\0'; i++){ // Attention ! 
         cle*=2;
         cle+=mot[i];
     }
@@ -48,11 +48,15 @@ hashtable* create_hashtable(int taille){
  */
 char* add_mot(hashtable* tab, char* mot){
     int key = cle(mot, tab->taille);
-    char* copyM = strdup(mot);
+    char* copyM = strdup(mot);  // Rappel: en interne malloc + strcpy
+
     s_node* noeud = list_orderedAppend(&(tab->elt[key].tab),strcmp_list, copyM);
     if(noeud!=NULL){
         if(list_get_data(noeud)==copyM){
             tab->elt[key].taille++;
+        }
+        else {
+            free(copyM);
         }
         return list_get_data(noeud);
     }
@@ -122,7 +126,7 @@ void free_hashtable_data(hashtable* table){
  * Prends en paramètre un pointeur de hastable et un pointeur de char (mot)
  * Supprime le mot de la table s'il existe
  * Ne renvois rien
- *//*
+ */
 void del_mot(hashtable* table, char* mot){
     int key = cle(mot,table->taille);
     char * temp;
@@ -134,15 +138,18 @@ void del_mot(hashtable* table, char* mot){
         temp = list_get_data(cur);
         table->elt[key].tab = list_remove(table->elt[key].tab,temp);
         table->elt[key].taille-=1;
+        free(temp);
     }
 }
-*/
+
 /**
  * Prends en paramètre un pointeur de hastable et un pointeur de char (mot)
  * Supprime le mot de la table s'il existe
  * Ne renvois rien
  */
+/*
 void del_mot(hashtable* table, char* mot){
     int key = cle(mot,table->taille);
     table->elt[key].tab=list_remove(table->elt[key].tab, (void*) mot);
 }
+    */
