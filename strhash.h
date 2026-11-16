@@ -19,6 +19,5 @@ void free_hashtable_data(hashtable* tab);
 char* add_mot(hashtable* tab, char* mot); 
 void del_mot(hashtable* tab, char* mot); 
 void display_stats(hashtable* tab);
-int strcmp_list(s_node* noeud, void* mot);
 
 #endif

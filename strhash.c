@@ -123,7 +123,7 @@ void del_mot(hashtable* table, char* mot){
     int key = cle(mot,table->taille);
     char * temp;
     s_node * cur = table->elt[key].tab;
-    while(cur != NULL && strcmp_list(cur,mot)){
+    while(cur != NULL && strcmp((char*)list_get_data(cur),(char*)mot)){
         cur = list_next(cur);
     }
     if(cur != NULL){
@@ -132,7 +132,6 @@ void del_mot(hashtable* table, char* mot){
         table->elt[key].taille-=1;
     }
 }
-
 
 static int strcmp_list(s_node* noeud, void* mot){
     return strcmp(((char*)list_get_data(noeud)),((char*)mot));
