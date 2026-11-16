@@ -59,15 +59,15 @@ int main(){
 //suppression d'un mot
     printf("suppression de manger\n");
     del_mot(table_hash,"manger");
-
-    del_mot(table_hash,str3);// à commenter si besoin
-    printf("suppression de voiture\n");
 /*
+    del_mot(table_hash,str3);// à commenter si besoin
+    */
+    printf("suppression de voiture\n");
     del_mot(table_hash,"voiture");
 
     printf("suppression de voiture\n");
     del_mot(table_hash,"voiture");    
-*/
+
     printf("affichage de la table de hachage\n");
     affichage_hashtable(table_hash);
 
