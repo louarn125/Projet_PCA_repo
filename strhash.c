@@ -78,11 +78,11 @@ void display_stats(hashtable* table){
         double moy = nb_elt/somme;
         ec_type = sqrt(ec_type/somme-moy*moy);
         printf("Statistiques de la table de hachage :\n");
-        printf("------------------------------------");
+        printf("------------------------------------\n");
         printf("Nombre total de mots : %d\n",nb_elt);
-        printf("------------------------------------");
+        printf("------------------------------------\n");
         printf("Tailles de listes de mots\n-- MIN : %d\n-- MAX : %d\n",min , max);
-        printf("------------------------------------");
+        printf("------------------------------------\n");
         printf("Écart type :%f\n",ec_type);
     }
     else{
