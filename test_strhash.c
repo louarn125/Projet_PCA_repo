@@ -16,8 +16,8 @@ void affichage_hashtable(hashtable * table){
 int main(){
     printf("Test lib strhash.h\n");
     hashtable* table_hash = create_hashtable(8);
-    hashtable* table_hash2 = create_hashtable(10);
-    hashtable* table_hash3 = create_hashtable(2);
+    //hashtable* table_hash2 = create_hashtable(10);
+    //hashtable* table_hash3 = create_hashtable(2);
     printf("affichage de la table de hachage\n");
     affichage_hashtable(table_hash);
 //ajout de mot type
