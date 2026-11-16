@@ -14,6 +14,11 @@ static int cle(char* mot, int taille){
     return cle;
 }
 
+/**
+ * Prends un entier taille en paramètre
+ * Retourne l'adresse d'une hashtable si tout s'est bien passé
+ * Retourne NULL si au moins un malloc a échoué
+ */
 hashtable* create_hashtable(int taille){
     hashtable* htab = (hashtable*)malloc(sizeof(hashtable));
     if(htab!=NULL){
@@ -32,6 +37,11 @@ hashtable* create_hashtable(int taille){
     return NULL;
 }
 
+/**
+ * Prends en parametre une addresse de hastable et un mot en char*
+ * Ajoute le mot dans la table de hachage au bon endroit et renvoi son adresse
+ * Ou si le mot existe déjà, renvoi l'adresse du mot déjà existant
+ */
 char* add_mot(hashtable* tab, char* mot){
     int key = cle(mot, tab->taille);
     char* copyM = strdup(mot);
@@ -45,6 +55,11 @@ char* add_mot(hashtable* tab, char* mot){
     return mot;
 }
 
+/**
+ * Prends une adresse de hashtable en paramètre
+ * Affiche les statistiques de la table de hachage
+ * Ne retourne rien
+ */
 void display_stats(hashtable* table){
     if(table!=NULL){
         int nb_elt = table->elt[0].taille, min = table->elt[0].taille, max = table->elt[0].taille;
@@ -71,12 +86,22 @@ void display_stats(hashtable* table){
     }
 }
 
+/**
+ * Prends en paramètre un pointeur de hashtable
+ * détruit entièrement la hashtable, les liste qui la composent et les données stockées dans les listes.
+ * Ne renvois rien
+ */
 void destroy_hashtable(hashtable* table){
     free_hashtable_data(table);
     free(table->elt);
     free(table);
 }
 
+/**
+ * Prends en paramètre un pointeur de hashtable
+ * Libère les données stockées dans les listes de la table
+ * Ne renvois rien
+ */
 void free_hashtable_data(hashtable* table){
     for(int i = 0; i<table->taille;i++){
         s_node * head = table->elt[i].tab;
@@ -89,20 +114,21 @@ void free_hashtable_data(hashtable* table){
     }
 }
 
+/**
+ * Prends en paramètre un pointeur de hastable et un pointeur de char (mot)
+ * Supprime le mot de la table s'il existe
+ * Ne renvois rien
+ */
 void del_mot(hashtable* table, char* mot){
-    int tkt = cle(mot,table->taille);
+    int key = cle(mot,table->taille);
     char * temp;
-    s_node * cur = table->elt[tkt].tab;
+    s_node * cur = table->elt[key].tab;
     while(cur != NULL && strcmp_list(cur,mot)){
         cur = list_next(cur);
     }
     if(cur != NULL){
         temp = list_get_data(cur);
-        table->elt[tkt].tab = list_remove(table->elt[tkt].tab,temp);
-        table->elt[tkt].taille-=1;
+        table->elt[key].tab = list_remove(table->elt[key].tab,temp);
+        table->elt[key].taille-=1;
     }
-}
-
-int strcmp_list(s_node* noeud, void* mot){
-    return strcmp(((char*)list_get_data(noeud)),((char*)mot));
 }
