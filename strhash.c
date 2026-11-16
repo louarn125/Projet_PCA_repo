@@ -57,7 +57,6 @@ void display_stats(hashtable* table){
             ec_type+=taille*taille;
         }
         double moy = nb_elt/somme;
-        printf("%f   %f",ec_type, moy);
         ec_type = sqrt(ec_type/somme-moy*moy);
         printf("Statistiques de la table de hachage :\n");
         printf("------------------------------------");
