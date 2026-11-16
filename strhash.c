@@ -132,3 +132,8 @@ void del_mot(hashtable* table, char* mot){
         table->elt[key].taille-=1;
     }
 }
+
+
+static int strcmp_list(s_node* noeud, void* mot){
+    return strcmp(((char*)list_get_data(noeud)),((char*)mot));
+}
