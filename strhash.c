@@ -4,6 +4,10 @@
 #include <stdio.h>
 #include <math.h>
 
+static int strcmp_list(s_node* noeud, void* mot){
+    return strcmp(((char*)list_get_data(noeud)),((char*)mot));
+}
+
 static int cle(char* mot, int taille){
     int cle = 0;
     for(int i = 0; i<strlen(mot); i++){
@@ -118,7 +122,7 @@ void free_hashtable_data(hashtable* table){
  * Prends en paramètre un pointeur de hastable et un pointeur de char (mot)
  * Supprime le mot de la table s'il existe
  * Ne renvois rien
- */
+ *//*
 void del_mot(hashtable* table, char* mot){
     int key = cle(mot,table->taille);
     char * temp;
@@ -132,7 +136,13 @@ void del_mot(hashtable* table, char* mot){
         table->elt[key].taille-=1;
     }
 }
-
-static int strcmp_list(s_node* noeud, void* mot){
-    return strcmp(((char*)list_get_data(noeud)),((char*)mot));
+*/
+/**
+ * Prends en paramètre un pointeur de hastable et un pointeur de char (mot)
+ * Supprime le mot de la table s'il existe
+ * Ne renvois rien
+ */
+void del_mot(hashtable* table, char* mot){
+    int key = cle(mot,table->taille);
+    table->elt[key].tab=list_remove(table->elt[key].tab, (void*) mot);
 }
