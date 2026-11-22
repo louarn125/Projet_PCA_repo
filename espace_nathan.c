@@ -18,11 +18,18 @@ void affichage_hashtable(hashtable * table){
 }
 
 void display_token(token* tk){
-    (tk->type==SHORT_SPACE?printf("%.4s\n", tk->data.space):printf("%s\n", tk->data.word));
+    printf("la presentement la presentement");
+    if(tk->type==SHORT_SPACE){
+        printf("c'est un %d qui contient %.4s /\n", tk->type, tk->data.space);
+    }
+    else{
+        printf("c'est un %d qui contient %s /\n", tk->type, tk->data.word);
+    }
 }
 
 void display_token_tab(token** tab, int taille){
     for(int i = 0; i<taille; i++){
+        printf("j'affiche le token n°%d\n",i);
         display_token(tab[i]);
     }
 }
@@ -113,50 +120,75 @@ int decoupage(hashtable* table, token** tab, int tailleTab, char* text){
     int type;
     int tTab = tailleTab;
     while(text[car]!='\0'){
-        type = (isspace(text[car])?1:0);
+        printf("%d\n", car);
+        printf("%d", isspace(text[car]));
+        if(isspace(text[car])){
+            type=isspace(text[car]);
+        }
+        else{
+            type=0;
+        }
         taille=0;
-        while(isspace(text[car])==type){
+        while(isspace(text[car])==type && text[car]!='\0'){
             taille++;
             car++;
         }
-        (type==0?printf("mot\n"):printf("espace\n"));
+        printf("%d\n", type);
+        if(type==0){
+            printf("mot\n");
+        }
+        else{
+            printf("espace\n");
+        }
 
         token* tk = (token*)malloc(sizeof(token));
         if(tk!=NULL){
-            if(type==1 && taille<=4){
+            if(type>=1 && taille<=4){
                 tk->type=SHORT_SPACE;
                 tk->textOffset=car;
-                strncpy(tk->data.space, text+car, taille);
+                printf("%d",taille);
+                strncpy(tk->data.space, text+car-taille, taille);
+                printf("laisse moi dormir ah zebi");
             }
             else{
                 char* mot = (char*)malloc((taille+1)*sizeof(char));
                 if(mot!=NULL){
-                    if(type==1){
+                    if(type>=1){
                         tk->type=SPACE;
+                        printf("type : %d\n",tk->type);
                     }
                     else{
                         tk->type=WORD;
                     }
                     tk->textOffset = car;
-                    strncpy(mot, text+car, taille);
+                    strncpy(mot, text+car-taille, taille);
                     mot[taille]='\0';
+                    printf("%s\n",mot);
                     tk->data.word=mot;
                 }
             }
             token** temp = realloc(tab,(tTab+1)*sizeof(token*));
-            if(temp!=tab){
+            if(temp!=NULL){
+                printf("je suis ici");
                 tab=temp;
-                tTab++;
                 tab[tTab]=tk;
+                printf("je suis la\n");
+                if(tab[tTab]->type==SHORT_SPACE){
+                    printf("%.4sok\n", tab[tTab]->data.space);
+                }
+                else{
+                    printf("%sok\n", tab[tTab]->data.word);
+                }
+                tTab++;
             }
             else{
                 free(tk->data.word);
                 free(tk);
             }
         }
-        car++;
-        printf("fini\n");
+        printf("fini-------------------\n");
     }
+    printf("%p\n",tab);
     return tTab;
 }
 
@@ -167,9 +199,10 @@ int main(){
     token** tab = (token**)malloc(0*sizeof(token*));
     int taille;
     printf("probleme dans découpage ?\n");
-    taille = decoupage(table, tab, 0, "test de decoupage d'un texte en jetons via la fontion decoupage");
+    taille = decoupage(table, tab, 0, "test       de decoupage d'un texte en jetons   via la  fontion decoupage\0");
     printf("affichage\n");
     affichage_hashtable(table);
+    printf("%p\n",tab);
     display_token_tab(tab, taille);
 
     return 0;
