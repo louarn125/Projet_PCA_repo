@@ -31,12 +31,10 @@ int main(){
     char * text_B = charger_texte("fichierB.txt");
     if( text_A == NULL || text_B == NULL) return 1;
 
-    printf("test\n");
     
     token_A = decoupage(table_hash,text_A);
-    printf("test2\n");
     token_B = decoupage(table_hash,text_B);
-    if( token_A == NULL || token_B == NULL) return 1; 
+    if( token_A == NULL || token_B == NULL) return 1;
 
     int ** lg = (int**) malloc(sizeof(int*)*token_A->taille);
 

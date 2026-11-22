@@ -52,9 +52,7 @@ char* add_mot(hashtable* tab, char* mot){
     if(copyM == NULL){
         return NULL;
     }
-    printf("test3\n");
-    s_node* noeud = list_orderedAppend(&(tab->elt[key].tab),strcmp_list,(void*) copyM); // enlever void*
-    printf("test4\n");
+    s_node* noeud = list_orderedAppend(&(tab->elt[key].tab),strcmp_list,(void*) copyM);
     if(noeud!=NULL){
         if(list_get_data(noeud)==copyM){
             tab->elt[key].taille++;

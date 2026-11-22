@@ -26,7 +26,7 @@ jeton_test.o: jeton_test.c jeton.h
 	gcc -Wall -Werror=vla -c jeton_test.c -o jeton_test.o
 
 espace_youenn: espace_youenn.o jeton.o strhash.o list.o
-	gcc espace_youenn.o jeton.o strhash.o list.o -o espace_youenn -lm
+	gcc espace_youenn.o jeton.o strhash.o list.o -o espace_youenn -lm -fsanitize=address
 
 espace_youenn.o: espace_youenn.c jeton.h
 	gcc -Wall -Werror=vla -c espace_youenn.c -o espace_youenn.o

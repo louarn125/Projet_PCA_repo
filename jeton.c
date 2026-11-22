@@ -60,7 +60,6 @@ token_tab * decoupage(hashtable* table, char* text){
     }
     tab->taille = 0;
 
-    printf("test\n");
     while(text[car]!='\0'){
 
         type=isspace(text[car]);
@@ -69,7 +68,6 @@ token_tab * decoupage(hashtable* table, char* text){
             taille++;
             car++;
         }
-
         token* tk = realloc(tab->tab,(tab->taille+1)*sizeof(token*));
         if(tk!=NULL){
             tab->tab = tk;
@@ -77,12 +75,10 @@ token_tab * decoupage(hashtable* table, char* text){
             if(type>=1 && taille<=4){ // SHORT_SPACE
                 tab->tab[tab->taille].type=SHORT_SPACE;
                 tab->tab[tab->taille].textOffset=car;
-                strncpy(tab->tab[tab->taille].data.space, text+car-taille, taille);
+                strncpy(tab->tab[tab->taille].data.space, text+car-taille, taille); // <- fout la merde
             }
             else{ // SPACE & WORD
-                printf("testM\n");
                 char* mot = (char*)malloc((taille+1)*sizeof(char)); 
-                printf("testK\n");
                 if(mot!=NULL){
 
                     if(type>=1){ // SPACE
@@ -95,9 +91,7 @@ token_tab * decoupage(hashtable* table, char* text){
 
                     strncpy(mot, text+car-taille, taille);
                     mot[taille]='\0';
-                    printf("test1\n");
                     char* temp_mot = add_mot(table,mot);
-                    printf("test2\n");
                     if(temp_mot == NULL){
                         free(tab->tab);
                         free(tab);
