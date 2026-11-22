@@ -12,6 +12,6 @@ typedef struct token {
 }token;
 
 char* charger_texte(const char* nom_fichier);
-int decoupage(hashtable* table, token** tab, char* text);
+int decoupage(hashtable* table, token** tab, int tailleTab, char* text);
 
 #endif
