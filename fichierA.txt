@@ -1,0 +1,17 @@
+Projet : Alpha-2026
+Statut : En cours de validation
+Version : 1.0.4
+
+Introduction :
+Le système central gère les flux de données entrants avec une latence minimale. Chaque module est indépendant et communique via une interface sécurisée. L'objectif principal de cette phase est d'assurer la stabilité globale avant le déploiement en production.
+
+Liste des paramètres :
+- Délai d'attente : 30 secondes
+- Tentatives maximum : 3
+- Mode de secours : Activé
+- Niveau de journalisation : INFO
+
+Notes complémentaires :
+L'équipe technique effectuera une maintenance préventive dimanche prochain à 02h00. Aucune interruption de service majeure n'est à prévoir durant cette opération.
+
+Fin du document.
