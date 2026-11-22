@@ -45,71 +45,74 @@ char* charger_texte(const char* nom_fichier){
     return text;
 }
 
-int decoupage(hashtable* table, token** tab, char* text){
-    int i = 0;
-    int offset = 0;
-    int tabId = 0;
-    while(text[i]!='\0'){
-        /*
-        Dans cette boucle je dois :
-        - Determiner la taille de la chaine a récuperer
-        - Creer un token du bon type
-        - lui ajouter ses valeurs (a l'aide de strncpy)
-        - incrementer le offset apres chaque nouveau token
-        */
-        int taille = 0;
-        if(isalpha(text[i])){
-            while(isalpha(text[i])){
-                taille++;
-                i++;
-            }
-            tab = (token**)realloc(tab, (tabId+1)*sizeof(token*));
-            token* tk = (token*)malloc(sizeof(token));
-            if(tk!=NULL){
-                char* temp = (char*)malloc((taille+1)*sizeof(char));
-                if(temp!=NULL){
-                    strncpy(temp, text+(i-taille), taille);
-                    temp[taille]='\0';
-                    tk->type = WORD;
-                    tk->data.word = add_mot(table, temp);
-                    tk->textOffset = offset;
-                    offset++;
-                    tab[tabId]=tk;
-                    tabId++;
-                    free(temp);
-                }
-            }
+token_tab * decoupage(hashtable* table, char* text){
+    int car = 0;
+    int taille;
+    int type;
+
+    token_tab * tab = (token_tab*) malloc(sizeof(token_tab));
+    if(tab == NULL) return NULL;
+
+    tab->tab = (token*)malloc(sizeof(token));
+    if(tab->tab == NULL){
+        free(tab);
+        return NULL;
+    }
+    tab->taille = 0;
+
+    printf("test\n");
+    while(text[car]!='\0'){
+
+        type=isspace(text[car]);
+        taille=0;
+        while(isspace(text[car])==type && text[car]!='\0'){
+            taille++;
+            car++;
         }
-        else if(isspace(text[i])){
-            while(isspace(text[i])){
-                taille++;
-                i++;
+
+        token* tk = realloc(tab->tab,(tab->taille+1)*sizeof(token*));
+        if(tk!=NULL){
+            tab->tab = tk;
+
+            if(type>=1 && taille<=4){ // SHORT_SPACE
+                tab->tab[tab->taille].type=SHORT_SPACE;
+                tab->tab[tab->taille].textOffset=car;
+                strncpy(tab->tab[tab->taille].data.space, text+car-taille, taille);
             }
-            token* tk = (token*)malloc(sizeof(token));
-            if(tk!=NULL){
-                if(taille<=4){
-                    tk->type = SHORT_SPACE;
-                    strncpy(tk->data.space, text+(i-taille), taille);
-                }
-                else{
-                    tk->type = SPACE;
-                    char* temp = (char*)malloc((taille+1)*sizeof(char));
-                    if(temp!=NULL){
-                        strncpy(temp, text+(i-taille), taille);
-                        temp[taille]='\0';
-                        tk->data.word=add_mot(table, temp);
-                        free(temp);
+            else{ // SPACE & WORD
+                printf("testM\n");
+                char* mot = (char*)malloc((taille+1)*sizeof(char)); 
+                printf("testK\n");
+                if(mot!=NULL){
+
+                    if(type>=1){ // SPACE
+                        tab->tab[tab->taille].type=SPACE;
+                    }else{ // WORD
+                        tab->tab[tab->taille].type=WORD;
                     }
+
+                    tab->tab[tab->taille].textOffset = car;
+
+                    strncpy(mot, text+car-taille, taille);
+                    mot[taille]='\0';
+                    printf("test1\n");
+                    char* temp_mot = add_mot(table,mot);
+                    printf("test2\n");
+                    if(temp_mot == NULL){
+                        free(tab->tab);
+                        free(tab);
+                        return NULL;
+                    }
+                    tab->tab[tab->taille].data.word=temp_mot;
+                    free(mot);
                 }
-                tk->textOffset = offset;
-                offset++;
-                tab[tabId]=tk;
-                tabId++;
             }
-        }
-        else{
-            i++;
+            tab->taille++;
+        }else{//realloc echoué
+            free(tab->tab);
+            free(tab);
+            return NULL;
         }
     }
-    return tabId;
+    return tab;
 }

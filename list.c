@@ -45,7 +45,9 @@ s_node* list_insert(s_node* head, void* val){
  * prend en argument un tête de liste et une valeur et ajoute un nouveau noeud contenant la valeur en queue de liste, renvoi la tête de liste
  */
 s_node* list_append(s_node* head, void* val){
+    printf("testonsj\n");
     s_node* new_queue = (s_node*)malloc(sizeof(s_node));
+    printf("testjson\n");
     if(new_queue == NULL) return head;
     if(head != NULL){
         s_node* cur_queue = head;
@@ -111,26 +113,32 @@ s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void
 s_node * list_orderedAppend(s_node ** head, int(*compare)(s_node *,void *), void * param){
     if(head!=NULL){
         if(*head!=NULL){
+            printf("test6\n"); // MMMM
             s_node * cur = *head;
             s_node * prev = NULL;
             while(compare(cur,param)<0 && cur->next != NULL){
                 prev = cur;
                 cur = cur->next;
             }
+            printf("test7\n"); ///PIGNOUF
             if(compare(cur,param)==0){
+                printf("testega\n");// llll
                 return cur;
             }
             if(compare(cur,param)>0){
                 s_node * new_node = list_insert(cur,param);
                 if(new_node==cur){
+                    printf("testegacur\n"); // LLLLL
                     return NULL;
                 }
                 if(prev!=NULL){
                     prev->next = new_node;
+                    printf("testjean\n"); //nh
                     return prev->next;
                 }
                 else{
                     *head = new_node;
+                    printf("testnegro\n");
                     return *head;
                 }
             }

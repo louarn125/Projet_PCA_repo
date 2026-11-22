@@ -49,8 +49,12 @@ hashtable* create_hashtable(int taille){
 char* add_mot(hashtable* tab, char* mot){
     int key = cle(mot, tab->taille);
     char* copyM = strdup(mot);  // Rappel: en interne malloc + strcpy
-
+    if(copyM == NULL){
+        return NULL;
+    }
+    printf("test3\n");
     s_node* noeud = list_orderedAppend(&(tab->elt[key].tab),strcmp_list, copyM);
+    printf("test4\n");
     if(noeud!=NULL){
         if(list_get_data(noeud)==copyM){
             tab->elt[key].taille++;
