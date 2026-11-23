@@ -5,7 +5,15 @@
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
-
+/**
+ * 
+ * Pour execution :
+ * 
+ * make espace_nathan
+ * 
+ * ./espace_nathan
+ * 
+ */
 void display_char_tab(s_node * noeud){
     printf("%s",((char*) list_get_data(noeud)));
 }
