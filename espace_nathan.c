@@ -121,18 +121,33 @@ int decoupage2(hashtable* table, token*** tab, int tailleTab, char* text){
 }
 */
 
-int calcul_lg(int i, int j, token_tab* text_A, token_tab* text_B){
-    if(i == 0 || j == 0){
-        return 0;
+int** calcul_lg(int iA, int jB, token_tab* text_A, token_tab* text_B){
+    int** matrice = (int**)malloc((iA+1)*sizeof(int*));
+    for(int n = 0; n<iA+1; n++){
+        matrice[n]= (int*)malloc((jB+1)*sizeof(int));
     }
-    if(text_A->tab[i].data.word == text_B->tab[j].data.word){
-        return calcul_lg(i-1,j-1,text_A,text_B)+1;
-    }else{
-        int a = calcul_lg(i-1,j,text_A,text_B);
-        int b = calcul_lg(i,j-1,text_A,text_B);
-        if(a>b)return a;
-        else return b;
+
+    for(int i = 0; i<iA+1; i++){
+        for(int j = 0; j<jB+1; j++){
+            if(i==0 || j==0){
+                matrice[i][j]=0;
+            }
+            else{
+                if(text_A->tab[i-1].data.word==text_B->tab[j-1].data.word || text_A->tab[i-1].data.space==text_B->tab[j-1].data.space){
+                    matrice[i][j]=matrice[i-1][j-1]+1;
+                }
+                else{
+                    if(matrice[i-1][j]>matrice[i][j-1]){
+                        matrice[i][j]=matrice[i-1][j];
+                    }
+                    else{
+                        matrice[i][j]=matrice[i][j-1];
+                    }
+                }
+            }
+        }
     }
+    return matrice;
 }
 
 int main(){
@@ -155,8 +170,8 @@ int main(){
     token_tab* token_A;
     token_tab* token_B;
 
-    char * text_A = charger_texte("text.txt");
-    char * text_B = charger_texte("tab.txt");
+    char * text_A = charger_texte("text1.txt");
+    char * text_B = charger_texte("text2.txt");
     if( text_A == NULL || text_B == NULL) return 1;
 
     
@@ -164,14 +179,11 @@ int main(){
     token_B = decoupage(table_hash,text_B);
     if( token_A == NULL || token_B == NULL) return 1;
 
-    int ** lg = (int**) malloc(sizeof(int*)*token_A->taille);
-    for(int i = 0; i<token_A->taille; i++){
-        lg[i] = (int*) malloc(sizeof(int)*token_B->taille);
-    }
-
-    for(int i = 0; i<token_A->taille; i++){
-        for(int j = 0; j<token_B->taille; j++){
-            printf("[%3d] ", lg[i][j]);
+    int ** lg = calcul_lg(token_A->taille, token_B->taille, token_A, token_B);
+    printf("je suis la\n");
+    for(int i = 0; i<token_A->taille+1; i++){
+        for(int j = 0; j<token_B->taille+1; j++){
+            printf("[%d] ", lg[i][j]);
         }
         printf("\n");
     }
