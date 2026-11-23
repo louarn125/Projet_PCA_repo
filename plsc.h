@@ -11,6 +11,6 @@ typedef struct text{
 }text;
 
 text* init_text(const char* origine, const char* changed);
-int ** calcul_lg_matrice(text);
+int ** calcul_lg_matrice(text *data);
 
 #endif

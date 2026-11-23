@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include "plsc.h"
 
 int calcul_lg(int i, int j, token_tab* text_A, token_tab* text_B){
 
@@ -16,6 +17,34 @@ int calcul_lg(int i, int j, token_tab* text_A, token_tab* text_B){
         int b = calcul_lg(i,j-1,text_A,text_B);
         if(a>b)return a;
         else return b;
+    }
+}
+
+int ** calcul_lg_matrice(text* data){
+    int ** matrice = (int**) malloc(sizeof(int*)*data->token_origine->taille+1);
+    for(int i = 0;i<data->token_origine->taille+1;i++){
+        matrice[i] = (int*) malloc(sizeof(int)*data->token_changed->taille+1);
+        matrice[i][0] = 0;
+    }
+    for(int i = 0; i<data->token_changed->taille+1;i++){
+        matrice[0][i] = 0;
+    }
+
+
+    int i = data->token_origine->taille;
+    int j = data->token_changed->taille;
+    int stop = 0;
+    if(data->token_changed->tab[j].type == SHORT_SPACE && data->token_changed->tab[j].type == data->token_origine->tab[i].type){
+        for(int k = 0; k < 4 || data->token_changed->tab[j].data.space[k] != '\0' || stop == 0;k++){
+            if(data->token_changed->tab[j].data.space[k] == data->token_origine->tab[i].data.space[k]){
+                stop = 1;
+            }
+        }
+    }
+    if(data->token_changed->tab[j].data.word == data->token_origine->tab[i].data.word || stop == 1){// cas d'égalité
+
+    }else{
+        
     }
 }
 
