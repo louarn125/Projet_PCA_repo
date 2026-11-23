@@ -68,13 +68,14 @@ token_tab * decoupage(hashtable* table, char* text){
             taille++;
             car++;
         }
-        token* tk = realloc(tab->tab,(tab->taille+1)*sizeof(token*));
+        token* tk = realloc(tab->tab,(tab->taille+1)*sizeof(token));
         if(tk!=NULL){
             tab->tab = tk;
 
             if(type>=1 && taille<=4){ // SHORT_SPACE
                 tab->tab[tab->taille].type=SHORT_SPACE;
                 tab->tab[tab->taille].textOffset=car;
+                //tab->tab[tab->taille].data
                 strncpy(tab->tab[tab->taille].data.space, text+car-taille, taille); // <- fout la merde
             }
             else{ // SPACE & WORD

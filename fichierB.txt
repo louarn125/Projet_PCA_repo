@@ -13,6 +13,6 @@ Liste des paramètres :
 - Compression des données : Oui
 
 Notes complémentaires :
-L'équipe technique effectuera une maintenance préventive dimanche prochain à 02h00. 
+L'équipe technique effectuera une maintenance préventive dimanche prochain a 02h00. 
 
 Fin du document.

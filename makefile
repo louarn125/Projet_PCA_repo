@@ -17,7 +17,7 @@ test_strhash.o: test_strhash.c strhash.h
 	gcc -Wall -Werror=vla -c test_strhash.c -o test_strhash.o
 
 jeton: jeton_test.o jeton.o strhash.o list.o
-	gcc jeton_test.o jeton.o strhash.o list.o -o jeton
+	gcc jeton_test.o jeton.o strhash.o list.o -o jeton -lm
 
 jeton.o: jeton.c jeton.h
 	gcc -Wall -Werror=vla -c jeton.c -o jeton.o

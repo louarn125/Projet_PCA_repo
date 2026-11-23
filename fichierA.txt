@@ -12,6 +12,6 @@ Liste des paramètres :
 - Niveau de journalisation : INFO
 
 Notes complémentaires :
-L'équipe technique effectuera une maintenance préventive dimanche prochain à 02h00. Aucune interruption de service majeure n'est à prévoir durant cette opération.
+L'équipe technique effectuera une maintenance préventive dimanche prochain a 02h00. Aucune interruption de service majeure n'est a prévoir durant cette opération.
 
 Fin du document.
