@@ -122,17 +122,17 @@ int decoupage2(hashtable* table, token*** tab, int tailleTab, char* text){
 */
 
 int calcul_lg(int i, int j, token_tab* text_A, token_tab* text_B){
-
     if(i == 0 || j == 0){
         return 0;
     }
-    if(text_A->tab[i].data.word == text_B->tab[j].data.word || text_A->tab[i].data.space == text_B->tab[j].data.space){
+    if(text_A->tab[i].data.word == text_B->tab[j].data.word){
         return calcul_lg(i-1,j-1,text_A,text_B)+1;
+    }else{
+        int a = calcul_lg(i-1,j,text_A,text_B);
+        int b = calcul_lg(i,j-1,text_A,text_B);
+        if(a>b)return a;
+        else return b;
     }
-    int a = calcul_lg(i-1,j,text_A,text_B);
-    int b = calcul_lg(i,j-1,text_A,text_B);
-    if(a>b)return a;
-    else return b;
 }
 
 int main(){
@@ -167,12 +167,6 @@ int main(){
     int ** lg = (int**) malloc(sizeof(int*)*token_A->taille);
     for(int i = 0; i<token_A->taille; i++){
         lg[i] = (int*) malloc(sizeof(int)*token_B->taille);
-    }
-
-    for(int i = token_A->taille-1; i>=0; i++){
-        for(int j = token_B->taille-1; j>=0; i++){
-            lg[i][j] = calcul_lg(i,j,token_A, token_B);
-        }
     }
 
     for(int i = 0; i<token_A->taille; i++){
