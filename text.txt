@@ -1,2 +1,2 @@
 bonjour je suis un text de test.
-la un retour a la ligne     ici 2 tabulations
+la un retour a la ligne ici 2 tabulations
