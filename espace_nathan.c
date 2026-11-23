@@ -114,7 +114,7 @@ int decoupage2(hashtable* table, token** tab, char* text){
 }
 */
 
-int decoupage(hashtable* table, token** tab, int tailleTab, char* text){
+int decoupage2(hashtable* table, token*** tab, int tailleTab, char* text){
     int car = 0;
     int taille;
     int type;
@@ -164,20 +164,28 @@ int decoupage(hashtable* table, token** tab, int tailleTab, char* text){
                     strncpy(mot, text+car-taille, taille);
                     mot[taille]='\0';
                     printf("%s\n",mot);
-                    tk->data.word=mot;
+                    char* temp = add_mot(table, mot);
+                    if(temp!=NULL){
+                        tk->data.word=temp;
+                    }
+                    else{
+                        free(mot);
+                        mot=NULL;
+                        temp=NULL;
+                    }
                 }
             }
-            token** temp = realloc(tab,(tTab+1)*sizeof(token*));
+            token** temp = realloc(*tab,(tTab+1)*sizeof(token*));
             if(temp!=NULL){
                 printf("je suis ici");
-                tab=temp;
-                tab[tTab]=tk;
+                *tab=temp;
+                (*tab)[tTab]=tk;
                 printf("je suis la\n");
-                if(tab[tTab]->type==SHORT_SPACE){
-                    printf("%.4sok\n", tab[tTab]->data.space);
+                if((*tab)[tTab]->type==SHORT_SPACE){
+                    printf("%.4sok\n", (*tab)[tTab]->data.space);
                 }
                 else{
-                    printf("%sok\n", tab[tTab]->data.word);
+                    printf("%sok\n", (*tab)[tTab]->data.word);
                 }
                 tTab++;
             }
@@ -188,7 +196,7 @@ int decoupage(hashtable* table, token** tab, int tailleTab, char* text){
         }
         printf("fini-------------------\n");
     }
-    printf("%p\n",tab);
+    printf("%p\n",*tab);
     return tTab;
 }
 
@@ -197,13 +205,15 @@ int decoupage(hashtable* table, token** tab, int tailleTab, char* text){
 int main(){
     hashtable* table = create_hashtable(10);
     token** tab = (token**)malloc(0*sizeof(token*));
+    token*** res = &tab;
     int taille;
+    char* texte = charger_texte("fichierA.txt");
     printf("probleme dans découpage ?\n");
-    taille = decoupage(table, tab, 0, "test       de decoupage d'un texte en jetons   via la  fontion decoupage\0");
+    taille = decoupage2(table, res, 0, texte );
     printf("affichage\n");
     affichage_hashtable(table);
-    printf("%p\n",tab);
-    display_token_tab(tab, taille);
+    printf("%p\n",*res);
+    display_token_tab(*res, taille);
 
     return 0;
 }
