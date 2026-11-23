@@ -30,3 +30,9 @@ espace_youenn: espace_youenn.o jeton.o strhash.o list.o
 
 espace_youenn.o: espace_youenn.c jeton.h
 	gcc -Wall -Werror=vla -c espace_youenn.c -o espace_youenn.o
+
+espace_nathan: espace_nathan.o jeton.o strhash.o list.o
+	gcc espace_nathan.o jeton.o strhash.o list.o -o espace_nathan -lm
+
+espace_nathan.o: espace_nathan.c jeton.h
+	gcc -Wall -Werror=vla -c espace_nathan.c -o espace_nathan.o

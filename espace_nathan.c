@@ -33,87 +33,7 @@ void display_token_tab(token** tab, int taille){
         display_token(tab[i]);
     }
 }
-
-/**
- * Prends en paramètre un pointeur de hashtable, un pointeur de token, un pointeur de char(texte)
- * 
- */
-
 /*
-int decoupage2(hashtable* table, token** tab, char* text){
-    int i = 0;
-    int offset = 0;
-    int tabId = 0;
-    while(text[i]!='\0'){
-        
-        Dans cette boucle je dois :
-        - Determiner la taille de la chaine a récuperer
-        - Creer un token du bon type
-        - lui ajouter ses valeurs (a l'aide de strncpy)
-        - incrementer le offset apres chaque nouveau token
-        
-        int taille = 0;
-        if(isalpha(text[i])){
-            while(isalpha(text[i])){
-                taille++;
-                i++;
-            }
-            printf("mot ?\n");
-            tab = realloc(tab, (tabId+1)*sizeof(token*));
-            token* tk = (token*)malloc(sizeof(token));
-            printf("etape 1\n");
-            if(tk!=NULL){
-                char* temp = (char*)malloc((taille+1)*sizeof(char));
-                if(temp!=NULL){
-                    strncpy(temp, text+(i-taille), taille);
-                    temp[taille]='\0';
-                    tk->type = WORD;
-                    tk->data.word = add_mot(table, temp);
-                    tk->textOffset = offset;
-                    offset++;
-                    tab[tabId]=tk;
-                    tabId++;
-                    free(temp);
-                }
-            }
-            printf("mot c'est bon\n");
-        }
-        else if(isspace(text[i])){
-            while(isspace(text[i])){
-                taille++;
-                i++;
-            }
-            token* tk = (token*)malloc(sizeof(token));
-            if(tk!=NULL){
-                if(taille<=4){
-                    tk->type = SHORT_SPACE;
-                    strncpy(tk->data.space, text+(i-taille), taille);
-                }
-                else{
-                    tk->type = SPACE;
-                    char* temp = (char*)malloc((taille+1)*sizeof(char));
-                    if(temp!=NULL){
-                        strncpy(temp, text+(i-taille), taille);
-                        temp[taille]='\0';
-                        tk->data.word=add_mot(table, temp);
-                        free(temp);
-                    }
-                }
-                tk->textOffset = offset;
-                offset++;
-                tab[tabId]=tk;
-                tabId++;
-            }
-            printf("espace c'est bon \n");
-        }
-        else{
-            i++;
-        }
-    }
-    return tabId;
-}
-*/
-
 int decoupage2(hashtable* table, token*** tab, int tailleTab, char* text){
     int car = 0;
     int taille;
@@ -199,10 +119,24 @@ int decoupage2(hashtable* table, token*** tab, int tailleTab, char* text){
     printf("%p\n",*tab);
     return tTab;
 }
+*/
 
+int calcul_lg(int i, int j, token_tab* text_A, token_tab* text_B){
 
+    if(i == 0 || j == 0){
+        return 0;
+    }
+    if(text_A->tab[i].data.word == text_B->tab[j].data.word || text_A->tab[i].data.space == text_B->tab[j].data.space){
+        return calcul_lg(i-1,j-1,text_A,text_B)+1;
+    }
+    int a = calcul_lg(i-1,j,text_A,text_B);
+    int b = calcul_lg(i,j-1,text_A,text_B);
+    if(a>b)return a;
+    else return b;
+}
 
 int main(){
+    /*
     hashtable* table = create_hashtable(10);
     token** tab = (token**)malloc(0*sizeof(token*));
     token*** res = &tab;
@@ -214,6 +148,39 @@ int main(){
     affichage_hashtable(table);
     printf("%p\n",*res);
     display_token_tab(*res, taille);
+    */
+
+    hashtable * table_hash = create_hashtable(16);
+
+    token_tab* token_A;
+    token_tab* token_B;
+
+    char * text_A = charger_texte("text.txt");
+    char * text_B = charger_texte("tab.txt");
+    if( text_A == NULL || text_B == NULL) return 1;
+
+    
+    token_A = decoupage(table_hash,text_A);
+    token_B = decoupage(table_hash,text_B);
+    if( token_A == NULL || token_B == NULL) return 1;
+
+    int ** lg = (int**) malloc(sizeof(int*)*token_A->taille);
+    for(int i = 0; i<token_A->taille; i++){
+        lg[i] = (int*) malloc(sizeof(int)*token_B->taille);
+    }
+
+    for(int i = token_A->taille-1; i>=0; i++){
+        for(int j = token_B->taille-1; j>=0; i++){
+            lg[i][j] = calcul_lg(i,j,token_A, token_B);
+        }
+    }
+
+    for(int i = 0; i<token_A->taille; i++){
+        for(int j = 0; j<token_B->taille; j++){
+            printf("[%3d] ", lg[i][j]);
+        }
+        printf("\n");
+    }
 
     return 0;
 }
