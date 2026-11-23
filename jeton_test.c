@@ -59,7 +59,7 @@ int main(){
     char* text = charger_texte("text.txt");
     printf("text:====================================================\n%s\n\n",text);
     char* text_bis = charger_texte("text.txt");
-    printf("text_bis:================================================\n%s\n\n",text);
+    printf("text_bis:================================================\n%s\n\n",text_bis);
     char * text_attendu = "bonjour       je suis un text       de test.\nla un retour a la      ligne\nici 2 tabulations\0";
     printf("text_attendu:============================================\n%s\n\n",text_attendu);
     char * text_attendu_modif = "bonjour       je suis un text       de text///.\nla un retour a la      ligne\nici 2 tabulations\0";
@@ -67,7 +67,7 @@ int main(){
     char* text_tab = charger_texte("tab.txt");
     printf("text_tab:================================================\n%s\n\n",text_tab);
     char* text_tab_attendu = "j'ai	besoin	d'un text		avec      des tabulations	donc					je le  créé";
-    printf("text_tab_attendu:========================================\n%s\n\n",text_tab);
+    printf("text_tab_attendu:========================================\n%s\n\n",text_tab_attendu);
 
     if(strcmp("text","text") == 0){
         printf("test de egalite ok\n");

@@ -36,7 +36,7 @@ int main(){
     token_B = decoupage(table_hash,text_B);
     if( token_A == NULL || token_B == NULL) return 1;
 
-    int ** lg = (int**) malloc(sizeof(int*)*token_A->taille);
+    /* int ** lg = (int**) malloc(sizeof(int*)*token_A->taille);
 
     if(lg == NULL) return 1;
     for(int i = 0; i<token_A->taille; i++){
@@ -47,7 +47,9 @@ int main(){
             printf("[%03d]",lg[i][j]);
         }
         printf("\n");
-    }
+    } */
+    int longueur = calcul_lg(token_A->taille,token_B->taille,token_A,token_B);
+    printf("%d",longueur);
 
     return 0;
 
