@@ -220,7 +220,7 @@ void display_list(s_node *head, void (*display)(s_node*)){
     }
     while(head->next != NULL){
         display(head);
-        printf(" ");
+        printf("|");
         head = head->next;
     }
     display(head);

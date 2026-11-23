@@ -76,7 +76,10 @@ token_tab * decoupage(hashtable* table, char* text){
                 tab->tab[tab->taille].type=SHORT_SPACE;
                 tab->tab[tab->taille].textOffset=car;
                 //tab->tab[tab->taille].data
-                strncpy(tab->tab[tab->taille].data.space, text+car-taille, taille); // <- fout la merde
+                for(int i = 0; i<4;i++){
+                    tab->tab[tab->taille].data.space[i] = '\0';
+                }
+                strncpy(tab->tab[tab->taille].data.space, text+car-taille, taille);
             }
             else{ // SPACE & WORD
                 char* mot = (char*)malloc((taille+1)*sizeof(char)); 
