@@ -4,8 +4,6 @@
 #include <string.h>
 #include <stdio.h>
 
-//hashtable * table_hash = create_hashtable(16);
-
 int calcul_lg(int i, int j, token_tab* text_A, token_tab* text_B){
 
     if(i == 0 || j == 0){
@@ -36,18 +34,7 @@ int main(){
     token_B = decoupage(table_hash,text_B);
     if( token_A == NULL || token_B == NULL) return 1;
 
-    /* int ** lg = (int**) malloc(sizeof(int*)*token_A->taille);
-
-    if(lg == NULL) return 1;
-    for(int i = 0; i<token_A->taille; i++){
-        lg[i] = (int*) malloc(sizeof(int)*token_B->taille);
-        if(lg[i] == NULL) return 1;
-        for(int j = 0; j<token_B->taille; j++){
-            lg[i][j] = calcul_lg(i,j,token_A,token_B);
-            printf("[%03d]",lg[i][j]);
-        }
-        printf("\n");
-    } */
+    
     int longueur = calcul_lg(token_A->taille,token_B->taille,token_A,token_B);
     printf("%d",longueur);
 
