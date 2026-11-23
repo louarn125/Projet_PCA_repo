@@ -37,7 +37,7 @@ void compare_token(token_tab* tabA,token_tab* tabB){
             return;
         }
     }
-    printf("aucune différence entre tokenA et tokenB\n");
+    printf("aucune différence entre le premier token et le second token\n");
 }
 
 void display_char_tab(s_node * noeud){
@@ -57,17 +57,17 @@ int main(){
     
     printf("test fonction de mise en memoire:\n\n");
     char* text = charger_texte("text.txt");
-    printf("text:==============================\n%s\n\n",text);
+    printf("text:====================================================\n%s\n\n",text);
     char* text_bis = charger_texte("text.txt");
-    printf("text_bis:==========================\n%s\n\n",text);
+    printf("text_bis:================================================\n%s\n\n",text);
     char * text_attendu = "bonjour       je suis un text       de test.\nla un retour a la      ligne\nici 2 tabulations\0";
-    printf("text_attendu:======================\n%s\n\n",text_attendu);
+    printf("text_attendu:============================================\n%s\n\n",text_attendu);
     char * text_attendu_modif = "bonjour       je suis un text       de text///.\nla un retour a la      ligne\nici 2 tabulations\0";
-    printf("text_attendu_modif:================\n%s\n\n",text_attendu_modif);
+    printf("text_attendu_modif:======================================\n%s\n\n",text_attendu_modif);
     char* text_tab = charger_texte("tab.txt");
-    printf("text_tab:==========================\n%s\n\n",text_tab);
-    char* text_tab_attendu = "j'ai	besoin	d'un text		avec      des tabulations	donc					je le  créé\n\0";
-    printf("text_tab_attendu:==================\n%s\n\n",text_tab);
+    printf("text_tab:================================================\n%s\n\n",text_tab);
+    char* text_tab_attendu = "j'ai	besoin	d'un text		avec      des tabulations	donc					je le  créé";
+    printf("text_tab_attendu:========================================\n%s\n\n",text_tab);
 
     if(strcmp("text","text") == 0){
         printf("test de egalite ok\n");
@@ -77,6 +77,10 @@ int main(){
         printf("text et text_attendu egaux\n");
     }else{printf("text et text_attendu pas egaux\n");}
 
+    if(strcmp(text,text_attendu_modif) == 0){
+        printf("text et text_attendu_modif egaux\n");
+    }else{printf("text et text_attendu_modif pas egaux\n");}
+
     if(strcmp(text,text_bis) == 0){
         printf("text et text_bis egaux\n");
     }else{printf("text et text_bis pas egaux\n");}
@@ -85,31 +89,37 @@ int main(){
         printf("text_tab et text_tab_attendu egaux\n");
     }else{printf("text_tab et text_tab_attendu pas egaux\n");}
 
-    printf("test decoupage:\n");
+    printf("test decoupage:=========================================\n");
     
     token_tab* tokenA = decoupage(table_hash,text);
-    printf("tokenA:\n");
+    printf("tokenA text:============================================\n");
     display_token_tab(tokenA);
     affichage_hashtable(table_hash);
     token_tab* tokenB = decoupage(table_hash,text_attendu);
-    printf("tokenB:\n");
+    printf("tokenB text_attendu:====================================\n");
     display_token_tab(tokenB);
     affichage_hashtable(table_hash);
     token_tab* tokenC = decoupage(table_hash,text_attendu_modif);
-    printf("tokenC:\n");
+    printf("tokenC text_attendu_modif:==============================\n");
     display_token_tab(tokenC);
     affichage_hashtable(table_hash);
     token_tab* tokenD = decoupage(table_hash,text_tab);
-    printf("tokenD:\n");
+    printf("tokenD text_tab:========================================\n");
     display_token_tab(tokenD);
     affichage_hashtable(table_hash);
+    token_tab* tokenE = decoupage(table_hash,text_tab_attendu);
+    printf("tokenE text_tab_attendu:================================\n");
+    display_token_tab(tokenE);
+    affichage_hashtable(table_hash);
     
-    printf("différence entre tokenA et tokenB:\n");
+    printf("différence entre tokenA et tokenB:======================\n");
     compare_token(tokenA,tokenB);
-    printf("différence entre tokenA et tokenC:\n");
+    printf("différence entre tokenA et tokenC:======================\n");
     compare_token(tokenA,tokenC);
-    printf("différence entre tokenA et tokenD:\n");
+    printf("différence entre tokenA et tokenD:======================\n");
     compare_token(tokenA,tokenD);
+    printf("différence entre tokenD et tokenE:======================\n");
+    compare_token(tokenD,tokenE);
 
     free(text);
     return 0;
